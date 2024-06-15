@@ -60,7 +60,7 @@
 		const uploadPromises = files.map(async (file) => {
 			const storageKey = uuidv4();
 			const dimensions = await getImageDimensions(file);
-			const command = new PutBucketCommand({
+			const command = new PutObjectCommand({
 				Bucket: data.configs.S3_BUCKET,
 				Key: storageKey,
 				Body: file,
