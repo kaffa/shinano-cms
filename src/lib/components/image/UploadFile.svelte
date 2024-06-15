@@ -60,7 +60,7 @@
 		const uploadPromises = files.map(async (file) => {
 			const storageKey = uuidv4();
 			const dimensions = await getImageDimensions(file);
-			const command = new PutObjectCommand({
+			const command = new PutBucketCorsCommand({
 				Bucket: data.configs.S3_BUCKET,
 				Key: storageKey,
 				Body: file,
@@ -70,7 +70,16 @@
 					'file-type': file.type,
 					'width': dimensions.width.toString(),
 					'height': dimensions.height.toString()
-				}
+				},
+				CORSConfiguration: {
+					CORSRules: new Array({
+						AllowedHeaders: ["content-type"], //this is important, do not use "*"
+						AllowedMethods: ["GET", "PUT", "HEAD"],
+						AllowedOrigins: ["*"],
+						ExposeHeaders: [],
+						MaxAgeSeconds: 3000,
+					}),
+				},
 			});
 
 			// Attempt upload
