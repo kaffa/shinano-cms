@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getToastStore, ProgressRadial } from '@skeletonlabs/skeleton';
-	import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+	import { PutObjectCorsCommand, S3Client } from '@aws-sdk/client-s3';
 	import exifr from 'exifr';
 	import { v4 as uuidv4 } from 'uuid';
 	import getDateFormat from '$lib/functions/dateFormat';
