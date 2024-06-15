@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getToastStore, ProgressRadial } from '@skeletonlabs/skeleton';
-	import { PutObjectCorsCommand, S3Client } from '@aws-sdk/client-s3';
+	import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 	import exifr from 'exifr';
 	import { v4 as uuidv4 } from 'uuid';
 	import getDateFormat from '$lib/functions/dateFormat';
@@ -60,7 +60,7 @@
 		const uploadPromises = files.map(async (file) => {
 			const storageKey = uuidv4();
 			const dimensions = await getImageDimensions(file);
-			const command = new PutBucketCorsCommand({
+			const command = new PutBucketCommand({
 				Bucket: data.configs.S3_BUCKET,
 				Key: storageKey,
 				Body: file,
